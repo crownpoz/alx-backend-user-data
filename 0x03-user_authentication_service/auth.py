@@ -8,15 +8,13 @@ from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
 from uuid import uuid4
 from typing import Union
+from db import DB
 
 
 def _hash_password(password: str) -> str:
     """ Takes in string arg, converts to unicode Returns
     salted, hashed pswd as bytesstring"""
     return hashpw(password.encode('utf-8'), gensalt())
-
-
-from db import DB
 
 
 def _generate_uuid() -> str:
@@ -76,7 +74,7 @@ class Auth:
             return None
 
     def destroy_session(self, user_id: str) -> None:
-            """ Updates user's session_id to None"""
+        """ Updates user's session_id to None"""
             if user_id is None:
                 return None
             try:
